@@ -19,7 +19,7 @@ public class NoteServlet extends HttpServlet {
     
     
    @Override
-   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { // used to display web page 
        
        
        /* When browser first makes request ill use doGet */ 
@@ -42,21 +42,8 @@ public class NoteServlet extends HttpServlet {
        // post request to recive the data from the jsp form 
        // if this is blank nothing will show up 
        
-       /*PARAMITERS*/
-       // retrieve form paramiters from jsp 
-       
-       //String age = request.getParameter("age"); // gets user input for age and stores it in age var 
-    
-       //int userAgeToInt = Integer.parseInt(age); 
-      // int userAgeToInt = Integer.parseInt(request.getParameter("age"));
-     
-      // String result; 
       
-       /* VALIDATION */ 
-       // if user leaves blank - error message = You must give current age 
-       // if user enters a name not num - error message = you must enter a number 
-       
-       // get path 
+              // get path 
        String path = getServletContext().getRealPath("/WEB-INF/note.txt");
        
        // read file
@@ -66,16 +53,39 @@ public class NoteServlet extends HttpServlet {
        String title = bufferedReader.readLine(); // could use split or substring if its all on one line 
        request.setAttribute("noteTitle" , title); 
        
+       /*PARAMITERS*/
+       // retrieve form paramiters from jsp 
+       
+        String newTitle = request.getParameter("title");
+        String newContents = request.getParameter("contents");
+        
+         Note newNote = Note(newTitle, newContents) ;
+         
+         request.setAttribute("noteTitle" , newTitle); 
+         request.setAttribute("noteContents" , newContents); 
+         
+         
+          // write to file 
+       PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path, false)));
+       
+       printWriter.write(newTitle);
+       printWriter.write(newContents + "\n");
+       
+      
+      
+       /* VALIDATION */ 
+       // if user leaves blank - error message = You must give current age 
+       // if user enters a name not num - error message = you must enter a number 
+       
+
       
        
          getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
          
          
-         /* 
-       // write to file 
-       PrintWriter printWriter;
-       printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path, false)));
-       */
+    
+      
+      
       
        
       

@@ -18,7 +18,7 @@
            
            <p><strong>Title: ${noteTitle}</p> <br>
            
-            <p><strong>Contents: ${noteContext} </p>
+            <p><strong>Contents: ${noteContents} </p>
             
                <a href="./edit" name="editlink">Edit</a>
     </body>

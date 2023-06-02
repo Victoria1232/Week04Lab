@@ -20,7 +20,7 @@
              
              <label><strong> Title:  </label><input type="text" name="title" required><br>  
                 <br> 
-                <label><strong> Contents:   <textarea id="contents" rows="10" cols="50"><b>
+                <label><strong> Contents:   <textarea  name="contents"rows="10" cols="50"><b>
                 
             <input type="submit" value="Save">  
              
