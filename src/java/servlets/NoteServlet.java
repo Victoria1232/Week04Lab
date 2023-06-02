@@ -1,7 +1,7 @@
 
 package servlets;
 
-
+import models.Note;
 import java.io.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,86 +24,69 @@ public class NoteServlet extends HttpServlet {
        
        /* When browser first makes request ill use doGet */ 
        
-       getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response); // use / before WEB
-       // getServletContext is a method inherited by HttpServlet
-       // getRequestDispasher lets you put in the file path for your jsp 
-       // forward - forwards the request and response objects to your jsp 
-       
-       // your the one sending the http requests and response for the jsp page 
-       
-       // lets you display the jsp page 
-       
-       
-   }
-   
-    @Override
-   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
-       // post request to recive the data from the jsp form 
-       // if this is blank nothing will show up 
-       
-      
-              // get path 
+                    // get path 
        String path = getServletContext().getRealPath("/WEB-INF/note.txt");
        
        // read file
        BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
        
       
-       String title = bufferedReader.readLine(); // could use split or substring if its all on one line 
-       request.setAttribute("noteTitle" , title); 
+       String title = bufferedReader.readLine().replace("ÿþ", " "); // ÿþ
+       String contents  = bufferedReader.readLine();
        
+         request.setAttribute("noteTitle" , title); 
+         request.setAttribute("noteContents" , contents); 
+        
+       
+       getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response); // use / before WEB
+    
+       
+   }
+   
+    @Override
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   
+       // what to do 
+       // make variables for title, contents 
+       // get the value for the text input and text area, then put them in the variables
+       // add those to the note object 
+       // write the new variables to the txt file / write note to the txt file 
+       // then load the viewnote page again if submit is activated = submit != null . 
+       
+       
+       // link goes to the edit jsp 
+       
+  
        /*PARAMITERS*/
-       // retrieve form paramiters from jsp 
+ 
+        // get path 
+        String path = getServletContext().getRealPath("/WEB-INF/note.txt");
        
         String newTitle = request.getParameter("title");
         String newContents = request.getParameter("contents");
         
-         Note newNote = Note(newTitle, newContents) ;
-         
-         request.setAttribute("noteTitle" , newTitle); 
-         request.setAttribute("noteContents" , newContents); 
-         
-         
-          // write to file 
-       PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path, false)));
-       
-       printWriter.write(newTitle);
-       printWriter.write(newContents + "\n");
-       
-      
-      
-       /* VALIDATION */ 
-       // if user leaves blank - error message = You must give current age 
-       // if user enters a name not num - error message = you must enter a number 
-       
 
-      
+        Note newNote = new  Note (newTitle, newContents) ;
+         
+         //request.setAttribute("noteTitle" , newTitle); 
+        // request.setAttribute("noteContents" , newContents); 
+         
+                 // write to file 
+      PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path, false)));
        
+      
+      printWriter.write(newNote.toString());
+      //printWriter.write(newTitle);
+      // printWriter.write(newContents + "\n");
+       
+       // 
          getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
          
-         
-    
-      
-      
-      
-       
-      
-        
-           
-            
-           // forward to jsp 
-          // forwards go at the end after all datas been added
+   
       
         
    }
    
   
-  
-
-  
-   
-
-
 
 }
