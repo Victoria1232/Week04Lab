@@ -5,14 +5,25 @@
  */
 package models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author mfgperez
  */
-public class Note {
-    
+public class Note implements Serializable {
+
+   
     private String title; 
     private String contents; 
+    
+    
+    public Note() {
+        
+        this.title = ""; 
+        contents = ""; 
+        
+    }
     
     // used to create a note 
     public Note(String title, String note) {
@@ -21,6 +32,24 @@ public class Note {
         contents = note; 
         
     }
+    
+    
+     public String getTitle() {
+        return title;
+    }
+
+    public String getContents() {
+        return contents;
+    }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+    
+       public void setTitle(String title) {
+        this.title = title;
+    }
+    
     
     
     
