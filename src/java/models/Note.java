@@ -11,4 +11,17 @@ package models;
  */
 public class Note {
     
+    private String title; 
+    private String contents; 
+    
+    // used to create a note 
+    public Note(String title, String note) {
+        
+        this.title = title; 
+        contents = note; 
+        
+    }
+    
+    
+    
 }
