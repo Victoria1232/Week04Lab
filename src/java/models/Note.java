@@ -49,6 +49,9 @@ public class Note implements Serializable {
        public void setTitle(String title) {
         this.title = title;
     }
+       public String note(String jspPage) {
+           return jspPage;
+       }
     
        
        @Override

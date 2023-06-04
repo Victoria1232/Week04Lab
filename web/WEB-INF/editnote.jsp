@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,11 +21,13 @@
              
              <label><strong> Title:  </label><input type="text" name="title" required><br>  
                 <br> 
-                <label><strong> Contents:   <textarea  name="contents"rows="10" cols="50"><b>
+             <label><strong> Contents:   <textarea  name="contents"rows="10" cols="50"><b>
                 
             <input type="submit" value="Save">  
              
          </form>
-         
+         <c:if test="${invalid == true}">
+         <p>Invalid title or contents. Please enter valid title and contents</p>
+         </c:if>
     </body>
 </html>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,10 +17,12 @@
         
            <h2>View Note </h2>
            
-           <p><strong>Title: ${noteTitle}</p> <br>
+           <p><strong>Title:  ${newNote.title}</p> <br>
            
-            <p><strong>Contents: ${noteContents} </p>
+            <p><strong>Contents:  ${newNote.contents}</p>
             
-               <a href="./edit" name="editlink">Edit</a>
+            <a href="/editnote.jsp" name="link">Edit</a>
+            
+           
     </body>
 </html>

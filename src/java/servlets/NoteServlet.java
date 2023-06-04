@@ -24,21 +24,25 @@ public class NoteServlet extends HttpServlet {
        
        /* When browser first makes request ill use doGet */ 
        
-                    // get path 
+         // get path 
        String path = getServletContext().getRealPath("/WEB-INF/note.txt");
        
        // read file
-       BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path)));
-       
+       BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(path))); 
+
       
-       String title = bufferedReader.readLine().replace("ÿþ", " "); // ÿþ
-       String contents  = bufferedReader.readLine();
+       String title = bufferedReader.readLine().replace("ÿþ", " "); // ÿþ    read first line replace the first 2 chars with empty string 
+       String contents  = bufferedReader.readLine(); // reads the next line after  
        
-         request.setAttribute("noteTitle" , title); 
-         request.setAttribute("noteContents" , contents); 
+  
+        Note newNote = new  Note (title, contents) ; // make note object 
+        request.setAttribute("newNote" , newNote); // set the name newNote to be object - we use this for the jsp ex ${newNote}
+      
         
-       
-       getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response); // use / before WEB
+         
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response); // use / before WEB
+    
     
        
    }
@@ -65,11 +69,23 @@ public class NoteServlet extends HttpServlet {
         String newTitle = request.getParameter("title");
         String newContents = request.getParameter("contents");
         
+        
+        if (newTitle == null || newTitle.equals("") || newContents == null || newContents.equals("")) {
+            
+            
+              request.setAttribute("newNote" , newTitle); 
+              request.setAttribute("newNote" , newContents); 
+              request.setAttribute("invalid" , true); 
+              
+            getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
+            return; 
+        }
 
-        Note newNote = new  Note (newTitle, newContents) ;
-         
-         //request.setAttribute("noteTitle" , newTitle); 
-        // request.setAttribute("noteContents" , newContents); 
+        
+       
+        Note newNote = new  Note (newTitle, newContents);
+        request.setAttribute("newNote" , newNote); 
+       
          
                  // write to file 
       PrintWriter printWriter = new PrintWriter(new BufferedWriter(new FileWriter(path, false)));
@@ -79,7 +95,7 @@ public class NoteServlet extends HttpServlet {
       //printWriter.write(newTitle);
       // printWriter.write(newContents + "\n");
        
-       // 
+    
          getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
          
    
