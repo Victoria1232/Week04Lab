@@ -17,12 +17,13 @@
         
            <h2>View Note </h2>
            
-           <p><strong>Title:  ${newNote.title}</p> <br>
+           <p><strong>Title:  ${newNote.title} ${newTitle}</p> <br>
            
-            <p><strong>Contents:  ${newNote.contents}</p>
+            <p><strong>Contents:  ${newNote.contents} ${newContents}</p>
             
-            <a href="/editnote.jsp" name="link">Edit</a>
-            
+          
+             <a href="note?edit" >Edit</a>
+            <!-- https://www.amazon.ca/search?search_query=rock+climbing -->
            
     </body>
 </html>
