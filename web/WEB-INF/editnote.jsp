@@ -21,7 +21,7 @@
              
              <label><strong> Title:  </label><input type="text" name="title" value="${newNote.title}"><br>  
                 <br> 
-                <label><strong> Contents:   <textarea  name="contents"rows="10" cols="50" value="${newNote.contents}"></textarea><br>
+                <label><strong> Contents:   <textarea  name="contents"rows="10" cols="50" >${newNote.contents}</textarea><br>
                 
             <input type="submit" value="Save">  
              

@@ -66,6 +66,7 @@ public class NoteServlet extends HttpServlet {
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response); // use / before WEB
+        return;
 
     }
 
@@ -108,22 +109,19 @@ public class NoteServlet extends HttpServlet {
 
         printWriter.println(newTitle);
         printWriter.println(newContents);
-        //printWriter.write(newTitle);
-        // printWriter.write(newContents + "\n");
-
+    
         printWriter.close();
 
         // Option 1
-        //Note newNote = new  Note (newTitle, newContents);
-        //request.setAttribute("newNote" , newNote); 
-        //getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
-        // return;
+        Note newNote = new  Note (newTitle, newContents);
+        request.setAttribute("newNote" , newNote); 
+       // getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
+       // return;
         
         
-       // request.setAttribute("newTitle", newTitle);
-        //request.setAttribute("newContents", newContents);
+
         response.sendRedirect("note"); // redirects to the do get method to display viewnote.page
-        return; // good practice to all ways return 
+         return; // good practice to all ways return 
         
 
     }
