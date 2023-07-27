@@ -1,7 +1,7 @@
 <%-- 
     Document   : editnote
     Created on : Jun 2, 2023, 12:04:20 PM
-    Author     : mfgperez
+    Author     : Victo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
