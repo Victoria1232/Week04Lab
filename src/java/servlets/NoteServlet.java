@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author mfgperez
+ * @author Victo
  */
 public class NoteServlet extends HttpServlet {
 
